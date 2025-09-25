@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { ProjectCard } from "../../../component/ProjectCard"; 
-import Image from "next/image";
 import Ebookhub from "../../../public/Screenshot 2025-09-23 at 10.38.18 AM.png"
 
 export default function ProjectsPage() {
@@ -42,7 +41,7 @@ export default function ProjectsPage() {
               My Portfolio
             </h1>
             <p className="text-gray-400 md:text-lg max-w-2xl mx-auto mt-4">
-              Here's a collection of my best work. Each project is a piece of my journey as a developer.
+              Here is a collection of my best work. Each project is a piece of my journey as a developer.
             </p>
           </motion.div>
 

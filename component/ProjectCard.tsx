@@ -1,14 +1,23 @@
-// app/components/ProjectCard.js
+// component/ProjectCard.tsx
 
 "use client";
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
-// This is the same component you wrote, now in its own file.
-export const ProjectCard = ({ title, description, imgSrc, tags, liveLink, repoLink }) => {
+// Define a type for the component's props
+export interface ProjectCardProps {
+  title: string;
+  description: string;
+  imgSrc: StaticImageData; // Use StaticImageData for imported images
+  tags: string[];
+  liveLink: string;
+  repoLink: string;
+}
+
+export const ProjectCard = ({ title, description, imgSrc, tags, liveLink, repoLink }: ProjectCardProps) => {
     const itemVariants = {
         hidden: { opacity: 0, y: 50 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
@@ -17,7 +26,7 @@ export const ProjectCard = ({ title, description, imgSrc, tags, liveLink, repoLi
     return (
         <motion.div 
             variants={itemVariants}
-            className="group relative flex flex-col bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-blue-600 transition-all duration-300"
+            className="group relative flex flex-col bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:border-blue-600 transition-all duration-300 h-full" // Added h-full for consistency
         >
             <div className="overflow-hidden">
                 <Image
