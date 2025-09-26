@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://ankitshukla.dev"),
   title: {
-    default: "Ankit Shukla | Portfolio",
+    default: "Ankit Shukla",
     template: "%s | Ankit Shukla", // for other pages like Projects, About etc.
   },
   description:
