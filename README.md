@@ -1,4 +1,4 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 # ⚡ Zynora
 
@@ -443,4 +443,3 @@ Please follow [Conventional Commits](https://www.conventionalcommits.org/) for c
 *© 2026 Ankit Shukla · ISC License*
 
 </div>
-]]>
