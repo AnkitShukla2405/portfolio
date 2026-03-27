@@ -1,85 +1,73 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "../../component/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ankitshukla.dev"),
   title: {
-    default: "Ankit Shukla",
-    template: "%s | Ankit Shukla", // for other pages like Projects, About etc.
+    default: "Ankit Shukla — Full-Stack Engineer",
+    template: "%s | Ankit Shukla",
   },
   description:
-    "Full Stack Developer Portfolio of Ankit Shukla — Building modern apps with Next.js, Tailwind CSS, and scalable backend systems.",
+    "Portfolio of Ankit Shukla — Full-Stack Engineer specializing in Next.js, GraphQL, MongoDB, Redis, TypeScript, and cloud-native architectures. Creator of Zynora, a production-grade multi-vendor e-commerce platform.",
   keywords: [
     "Ankit Shukla",
-    "Shukla",
-    "Portfolio",
     "Full Stack Developer",
-    "Backend Developer",
+    "Full Stack Engineer",
     "Next.js Developer",
+    "GraphQL Developer",
+    "TypeScript",
+    "MongoDB",
+    "Redis",
+    "Zynora",
+    "Backend Engineer",
+    "React Developer",
+    "Node.js",
+    "AWS S3",
+    "Stripe",
+    "Portfolio",
   ],
   authors: [{ name: "Ankit Shukla" }],
   creator: "Ankit Shukla",
   publisher: "Ankit Shukla",
-  alternates: {
-    canonical: "https://ankitshukla.dev",
-  },
-
+  alternates: { canonical: "https://ankitshukla.dev" },
   openGraph: {
-    title: "Ankit Shukla | Portfolio",
+    title: "Ankit Shukla | Full-Stack Engineer",
     description:
-      "Showcasing projects, skills, and achievements of Ankit Shukla — Full Stack Developer.",
+      "Full-Stack Engineer specialized in GraphQL, Next.js, and scalable backend systems. Creator of Zynora — production-grade multi-vendor e-commerce platform.",
     url: "https://ankitshukla.dev",
     siteName: "Ankit Shukla Portfolio",
-    images: [
-      {
-        url: "https://ankitshukla.dev/_next/static/media/IMG_20250917_002438_025.35227f98.webp",
-        width: 1200,
-        height: 630,
-        alt: "Ankit Shukla Portfolio Preview",
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
-
   twitter: {
     card: "summary_large_image",
-    title: "Ankit Shukla | Full Stack Developer",
+    title: "Ankit Shukla | Full-Stack Engineer",
     description:
-      "Portfolio of Ankit Shukla — Building scalable web apps with Next.js, React, and Node.js.",
-    images: [
-      "https://ankitshukla.dev/_next/static/media/IMG_20250917_002438_025.35227f98.webp",
-    ],
-    creator: "@yourtwitterhandle", // <-- yaha apna Twitter handle daal
+      "Portfolio of Ankit Shukla — building production-grade systems with Next.js, GraphQL, Redis, and beyond.",
   },
-
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
+  icons: { icon: "/favicon.ico" },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
-        {/* ✅ JSON-LD Structured Data for Personal Branding */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -89,27 +77,31 @@ export default function RootLayout({
               name: "Ankit Shukla",
               url: "https://ankitshukla.dev",
               sameAs: [
-                "https://github.com/ankitshukla",
-                "https://www.linkedin.com/in/ankitshukla",
-                "https://twitter.com/yourtwitterhandle",
+                "https://github.com/AnkitShukla2405",
+                "https://www.linkedin.com/in/ankitshukladev",
               ],
-              jobTitle: "Full Stack Developer",
-              worksFor: {
-                "@type": "Organization",
-                name: "Self-employed",
-              },
+              jobTitle: "Full-Stack Engineer",
+              description:
+                "Full-Stack Engineer specializing in Next.js, GraphQL, MongoDB, Redis, TypeScript, AWS S3, and Stripe integrations.",
+              knowsAbout: [
+                "Next.js",
+                "React",
+                "GraphQL",
+                "MongoDB",
+                "Redis",
+                "TypeScript",
+                "Node.js",
+                "AWS S3",
+                "Stripe",
+                "Docker",
+              ],
             }),
           }}
         />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-gray-950 via-black to-gray-900 text-white min-h-screen`}
-      >
-        {/* Navbar Fixed on Top */}
+      <body className="antialiased">
         <Navbar />
-
-        {/* Main Content */}
-        <main className="pt-15">{children}</main>
+        <div className="pt-0">{children}</div>
       </body>
     </html>
   );

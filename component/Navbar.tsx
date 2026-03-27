@@ -1,109 +1,143 @@
-"use client"; // Required for hooks like usePathname and useState
+"use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react"; // Hamburger and Close icons
+import { Menu, X, Code2 } from "lucide-react";
 
-// You can keep this outside the component
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
-  { href: "/contact", label: "Contact" },
+  { href: "#hero", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
+  { href: "#project", label: "Project" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!isMobileMenuOpen);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const handleAnchor = (href: string) => {
+    setIsOpen(false);
+    if (href.startsWith("#")) {
+      const el = document.querySelector(href);
+      el?.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
     <>
-      {/* Desktop Navbar */}
-      <nav className="hidden sm:flex fixed top-4 left-1/2 -translate-x-1/2 z-50">
+      {/* Desktop */}
+      <motion.nav
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className={`hidden sm:flex fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300`}
+      >
         <div
-          className="flex items-center justify-center gap-8 px-8 py-3
-                        bg-black/60 backdrop-blur-lg 
-                        border border-white/10 rounded-full shadow-lg"
+          className={`flex items-center gap-1 px-5 py-2 rounded-full transition-all duration-300 ${
+            scrolled
+              ? "bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50"
+              : "bg-black/40 backdrop-blur-md border border-white/5"
+          }`}
         >
-          {links.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className="relative px-3 py-1 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300"
-            >
-              {/* Animated highlight for the active link */}
-              {pathname === href && (
-                <motion.span
-                  layoutId="active-pill"
-                  className="absolute inset-0 bg-blue-500/20 rounded-full"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              )}
-              <span className="relative z-10">{label}</span>
-            </Link>
-          ))}
-        </div>
-      </nav>
-
-      {/* Mobile Navbar */}
-      <nav className="sm:hidden fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-lg">
-        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-          {/* Logo/Brand Name */}
-          <Link href="/" className="text-xl font-bold text-white">
-            AS
-          </Link>
-          {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMobileMenu}
-            className="p-2 text-white transition-colors hover:text-blue-400"
-            aria-label="Toggle menu"
+          {/* Logo */}
+          <Link
+            href="#hero"
+            onClick={() => handleAnchor("#hero")}
+            className="flex items-center gap-2 mr-4 group"
           >
-            <AnimatePresence mode="wait">
-              {isMobileMenuOpen ? (
-                <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
-                  <X size={24} />
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Code2 size={14} className="text-white" />
+            </div>
+            <span className="text-sm font-bold text-white">AS</span>
+          </Link>
+
+          {links.map(({ href, label }) => (
+            <button
+              key={href}
+              onClick={() => handleAnchor(href)}
+              className="relative px-4 py-1.5 text-sm font-medium text-gray-400 hover:text-white transition-colors duration-200 rounded-full hover:bg-white/5"
+            >
+              {label}
+            </button>
+          ))}
+
+          <a
+            href="/resume.pdf"
+            download
+            className="ml-3 px-4 py-1.5 text-sm font-semibold text-white rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:opacity-90 hover:shadow-lg hover:shadow-indigo-500/30 transition-all"
+          >
+            Resume
+          </a>
+        </div>
+      </motion.nav>
+
+      {/* Mobile */}
+      <nav className="sm:hidden fixed top-0 left-0 right-0 z-50">
+        <div className="flex items-center justify-between px-4 py-3 bg-black/80 backdrop-blur-xl border-b border-white/5">
+          <button
+            onClick={() => handleAnchor("#hero")}
+            className="flex items-center gap-2"
+          >
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+              <Code2 size={14} className="text-white" />
+            </div>
+            <span className="font-bold text-white text-sm">Ankit Shukla</span>
+          </button>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-2 text-gray-400 hover:text-white transition-colors"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {isOpen ? (
+                <motion.div key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
+                  <X size={22} />
                 </motion.div>
               ) : (
-                <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
-                  <Menu size={24} />
+                <motion.div key="m" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
+                  <Menu size={22} />
                 </motion.div>
               )}
             </AnimatePresence>
           </button>
         </div>
 
-        {/* Mobile Menu Panel */}
         <AnimatePresence>
-          {isMobileMenuOpen && (
+          {isOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="absolute top-full left-0 w-full bg-black/80 border-b border-white/10"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="overflow-hidden bg-black/90 backdrop-blur-xl border-b border-white/5"
             >
-              <ul className="flex flex-col items-center p-4">
+              <ul className="flex flex-col gap-1 p-4">
                 {links.map(({ href, label }) => (
-                  <li key={href} className="w-full">
-                    <Link
-                      href={href}
-                      onClick={() => setMobileMenuOpen(false)} // Close menu on click
-                      className={`block w-full text-center py-3 text-lg font-medium transition-colors ${
-                        pathname === href
-                          ? "text-blue-400"
-                          : "text-gray-300 hover:text-white"
-                      }`}
+                  <li key={href}>
+                    <button
+                      onClick={() => handleAnchor(href)}
+                      className="w-full text-left py-3 px-4 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium"
                     >
                       {label}
-                    </Link>
+                    </button>
                   </li>
                 ))}
+                <li className="mt-2">
+                  <a
+                    href="/resume.pdf"
+                    download
+                    className="block text-center py-3 px-4 text-white font-semibold rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600"
+                  >
+                    Download Resume
+                  </a>
+                </li>
               </ul>
             </motion.div>
           )}

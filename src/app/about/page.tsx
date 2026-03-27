@@ -21,10 +21,10 @@ export default function About() {
             <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
 
             <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16 z-10">
-                
+
                 {/* ====== Image Section ====== */}
                 {/* Added an animation group for a staggered effect */}
-                <div 
+                <div
                     className="group relative flex-shrink-0 animate-fade-in-up"
                     style={{ animationDelay: '0.4s', animationFillMode: 'backwards' }}
                 >
@@ -43,8 +43,8 @@ export default function About() {
                 </div>
 
                 {/* ====== Text Section ====== */}
-                <div 
-                    className="flex-1 max-w-xl text-center lg:text-left animate-fade-in-up" 
+                <div
+                    className="flex-1 max-w-xl text-center lg:text-left animate-fade-in-up"
                     style={{ animationFillMode: 'backwards' }}
                 >
                     <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-2">
@@ -53,9 +53,9 @@ export default function About() {
                     <h2 className="text-xl md:text-2xl font-medium text-blue-400 mb-6">
                         Full Stack Developer
                     </h2>
-                    
+
                     <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-8">
-                        I build modern, scalable, and efficient applications with a passion for clean code and user-centric design. From freelance projects to dynamic team environments, I thrive on solving diverse challenges and delivering high-value digital experiences.
+                        I engineer production-grade web systems end-to-end — from database schema to CI/CD-driven deployment — building platforms like Zynora with GraphQL APIs, Redis-backed concurrency control, and reliable payment systems, with a strong focus on correctness, performance, and system design.
                     </p>
 
                     {/* Tech Stack Icons */}
@@ -70,10 +70,10 @@ export default function About() {
                             ))}
                         </div>
                     </div>
-                    
+
                     {/* Socials and CTA */}
                     <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                        <a 
+                        <a
                             href="/projects"
                             className="inline-block w-full sm:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
                         >
