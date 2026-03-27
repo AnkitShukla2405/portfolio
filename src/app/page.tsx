@@ -427,7 +427,7 @@ const AboutSection = () => (
   <section id="about" className="py-28 px-4">
     <div className="max-w-5xl mx-auto">
       <RevealonScroll>
-        <p className="text-indigo-400 text-sm font-mono mb-3">// about_me</p>
+        <p className="text-indigo-400 text-sm font-mono mb-3">{"// about_me"}</p>
         <h2 className="text-3xl sm:text-4xl font-black text-white mb-12">
           Engineering-First Mindset
         </h2>
@@ -477,7 +477,7 @@ const SkillsSection = () => (
   >
     <div className="max-w-6xl mx-auto">
       <RevealonScroll>
-        <p className="text-indigo-400 text-sm font-mono mb-3">// tech_stack</p>
+        <p className="text-indigo-400 text-sm font-mono mb-3">{"// tech_stack"}</p>
         <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
           Skills & Technologies
         </h2>
@@ -526,7 +526,7 @@ const ProjectSection = () => (
 
       {/* Header */}
       <RevealonScroll>
-        <p className="text-indigo-400 text-sm font-mono mb-3">// featured_project</p>
+        <p className="text-indigo-400 text-sm font-mono mb-3">{"// featured_project"}</p>
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14">
           <div>
             <h2 className="text-3xl sm:text-4xl font-black text-white mb-2">
@@ -709,7 +709,7 @@ const ContactSection = () => (
 
     <div className="relative z-10 max-w-3xl mx-auto text-center">
       <RevealonScroll>
-        <p className="text-indigo-400 text-sm font-mono mb-4">// get_in_touch</p>
+        <p className="text-indigo-400 text-sm font-mono mb-4">{"// get_in_touch"}</p>
         <h2 className="text-3xl sm:text-5xl font-black text-white mb-4">
           Let&apos;s Build Something <span className="gradient-text">Remarkable</span>
         </h2>
